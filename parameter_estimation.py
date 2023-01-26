@@ -757,7 +757,7 @@ def wrapper3A(par, *args):
                 [value for value in data_partial.reward],
                 [value for value in data_partial.average_reward]) #for the second blocks
     
-    term2 = NLbias((l_fit_1, l_fit_2, beta, tau), x0 = (x0[0], x0[0], x0[1], x0[2]), xcov = np.diag(xstd[0], xstd[0], xstd[1], xstd[2]))
+    term2 = NLbias((l_fit_1, l_fit_2, beta, tau), x0 = (x0[0], x0[0], x0[1], x0[2]), xcov = np.diag([xstd[0], xstd[0], xstd[1], xstd[2]]))
     NLprob = term1 + term2
     return NLprob
 
@@ -820,7 +820,7 @@ def wrapper3B(par, *args):
                 [value for value in data_partial.reward],
                 [value for value in data_partial.average_reward]) #for the second blocks
 
-    term2 = NLbias((l_fit, beta_1, beta_2, tau), x0 = (x0[0], x0[1], x0[1], x0[2]), xcov = np.diag(xstd[0], xstd[1], xstd[1], xstd[2]))
+    term2 = NLbias((l_fit, beta_1, beta_2, tau), x0 = (x0[0], x0[1], x0[1], x0[2]), xcov = np.diag([xstd[0], xstd[1], xstd[1], xstd[2]]))
 
     NLprob = term1 + term2
     return NLprob
@@ -884,7 +884,7 @@ def wrapper3C(par, *args):
                 [value for value in data_partial.reward],
                 [value for value in data_partial.average_reward]) #for the second blocks
 
-    term2 = NLbias((l_fit, beta, tau_1, tau_2), x0 = (x0[0], x0[1], x0[2], x0[2]), xcov = np.diag(xstd[0], xstd[1], xstd[2], xstd[2]))
+    term2 = NLbias((l_fit, beta, tau_1, tau_2), x0 = (x0[0], x0[1], x0[2], x0[2]), xcov = np.diag([xstd[0], xstd[1], xstd[2], xstd[2]]))
 
     NLprob = term1 + term2
     return NLprob
@@ -952,7 +952,7 @@ def wrapper4A(par, *args):
                 [value for value in data_partial.average_reward]) #for the second blocks
 
     
-    term2 = NLbias((l_fit, beta_1, beta_2, tau_1, tau_2), x0 = (x0[0], x0[1], x0[1], x0[2], x0[2]), xcov = np.diag(xstd[0], xstd[1], xstd[1], xstd[2], xstd[2]))
+    term2 = NLbias((l_fit, beta_1, beta_2, tau_1, tau_2), x0 = (x0[0], x0[1], x0[1], x0[2], x0[2]), xcov = np.diag([xstd[0], xstd[1], xstd[1], xstd[2], xstd[2]]))
 
     NLprob = term1 + term2
     return NLprob
@@ -1018,7 +1018,7 @@ def wrapper4B(par, *args):
                 [value for value in data_partial.reward],
                 [value for value in data_partial.average_reward]) #for the second blocks
 
-    term2 = NLbias((l_fit_1, l_fit_2, beta, tau_1, tau_2), x0 = (x0[0], x0[0], x0[1], x0[2], x0[2]), xcov = np.diag(xstd[0], xstd[0], xstd[1], xstd[2], xstd[2]))
+    term2 = NLbias((l_fit_1, l_fit_2, beta, tau_1, tau_2), x0 = (x0[0], x0[0], x0[1], x0[2], x0[2]), xcov = np.diag([xstd[0], xstd[0], xstd[1], xstd[2], xstd[2]]))
 
     NLprob = term1 + term2
     return NLprob
@@ -1085,7 +1085,7 @@ def wrapper4C(par, *args):
                 [value for value in data_partial.reward],
                 [value for value in data_partial.average_reward]) #for the second blocks
     
-    term2 = NLbias((l_fit_1, l_fit_2, beta_1, beta_2, tau), x0 = (x0[0], x0[0], x0[1], x0[1], x0[2]), xcov = np.diag(xstd[0], xstd[0], xstd[1], xstd[1], xstd[2]))
+    term2 = NLbias((l_fit_1, l_fit_2, beta_1, beta_2, tau), x0 = (x0[0], x0[0], x0[1], x0[1], x0[2]), xcov = np.diag([xstd[0], xstd[0], xstd[1], xstd[1], xstd[2]]))
 
     NLprob = term1 + term2
     return NLprob
