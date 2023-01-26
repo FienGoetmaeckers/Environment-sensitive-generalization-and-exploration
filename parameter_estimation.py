@@ -16,7 +16,7 @@ Prior with which we want to estimate the model parameters:
 #prior values of model parameters, used to start the search and to bias the optimization
 x0 = [2, 0.5, 0.01]
 #std of the priors on the model parameters, used to bias the optimization
-xstd = [8, 0.2, 0.2]
+xstd = [8, 0.2, 0.2] #actually is this the variance, just wrong name but correct values and use
 #covariance matrix of the priors on the model parameters
 xcov = np.diag(xstd)
 
@@ -93,10 +93,10 @@ def estimate_1env(W, L, nr_trials, nr_blocks, data):
           % (np.median(l_fit_est_list), (np.percentile(l_fit_est_list, 75) - np.percentile(l_fit_est_list, 25))/2, 
              np.median(beta_est_list), (np.percentile(beta_est_list, 75) - np.percentile(beta_est_list, 25))/2, 
                   np.median(tau_est_list), (np.percentile(tau_est_list, 75) - np.percentile(tau_est_list, 25))/2 ))
-    print("NLL = %.3f +- %.3f \n" % (np.median(NLL_list), (np.percentile(NLL_list, 75) - np.percentile(NLL_list, 25))/2))
+    print("NLL = %.3f\n" % np.sum(NLL_list))
     print("\n")
     resx = (np.median(l_fit_est_list), np.median(beta_est_list), np.median(tau_est_list))
-    resfun = np.median(NLL_list)
+    resfun = np.sum(NLL_list)
     
         
     return (resx, resfun)
@@ -206,10 +206,10 @@ def estimate_2env(W, L, nr_trials, nr_blocks, data):
           % (np.median(l_fit_est_list), (np.percentile(l_fit_est_list, 75) - np.percentile(l_fit_est_list, 25))/2, 
              np.median(beta_est_list), (np.percentile(beta_est_list, 75) - np.percentile(beta_est_list, 25))/2, 
                   np.median(tau_est_list), (np.percentile(tau_est_list, 75) - np.percentile(tau_est_list, 25))/2 ))
-    print("NLL = %.3f +- %.3f \n" % (np.median(NLL_list), (np.percentile(NLL_list, 75) - np.percentile(NLL_list, 25))/2))
+    print("NLL = %.3f\n" % np.sum(NLL_list))
     print("\n")
     res1x = (np.median(l_fit_est_list), np.median(beta_est_list), np.median(tau_est_list))
-    res1fun = np.median(NLL_list)
+    res1fun = np.sum(NLL_list)
     
     #for the second block:
     data_secondhalf = data.query('block_nr >= {}'.format(nr_blocks_per_con))
@@ -248,10 +248,10 @@ def estimate_2env(W, L, nr_trials, nr_blocks, data):
           % (np.median(l_fit_est_list), (np.percentile(l_fit_est_list, 75) - np.percentile(l_fit_est_list, 25))/2, 
              np.median(beta_est_list), (np.percentile(beta_est_list, 75) - np.percentile(beta_est_list, 25))/2, 
                   np.median(tau_est_list), (np.percentile(tau_est_list, 75) - np.percentile(tau_est_list, 25))/2 ))
-    print("NLL = %.3f +- %.3f \n" % (np.median(NLL_list), (np.percentile(NLL_list, 75) - np.percentile(NLL_list, 25))/2))
+    print("NLL = %.3f\n" % np.sum(NLL_list))
     print("\n")
     res2x = (np.median(l_fit_est_list), np.median(beta_est_list), np.median(tau_est_list))
-    res2fun = np.median(NLL_list)
+    res2fun = np.sum(NLL_list)
     
     results.append(res1x)
     results.append(res1fun)
@@ -323,10 +323,10 @@ def estimate_2env(W, L, nr_trials, nr_blocks, data):
              np.median(l_fit_est_2_list), (np.percentile(l_fit_est_2_list, 75) - np.percentile(l_fit_est_2_list, 25))/2,
              np.median(beta_est_list), (np.percentile(beta_est_list, 75) - np.percentile(beta_est_list, 25))/2, 
                   np.median(tau_est_list), (np.percentile(tau_est_list, 75) - np.percentile(tau_est_list, 25))/2 ))
-    print("NLL = %.3f +- %.3f \n" % (np.median(NLL_list), (np.percentile(NLL_list, 75) - np.percentile(NLL_list, 25))/2))
+    print("NLL = %.3f\n" % np.sum(NLL_list))
     print("\n")
     resfx = (np.median(l_fit_est_1_list), np.median(l_fit_est_2_list), np.median(beta_est_list), np.median(tau_est_list))
-    resffun = np.median(NLL_list)
+    resffun = np.sum(NLL_list)
     
     results.append(resfx)
     results.append(resffun)
@@ -382,10 +382,10 @@ def estimate_2env(W, L, nr_trials, nr_blocks, data):
              np.median(beta_est_1_list), (np.percentile(beta_est_1_list, 75) - np.percentile(beta_est_1_list, 25))/2, 
              np.median(beta_est_2_list), (np.percentile(beta_est_2_list, 75) - np.percentile(beta_est_2_list, 25))/2,
                   np.median(tau_est_list), (np.percentile(tau_est_list, 75) - np.percentile(tau_est_list, 25))/2 ))
-    print("NLL = %.3f +- %.3f \n" % (np.median(NLL_list), (np.percentile(NLL_list, 75) - np.percentile(NLL_list, 25))/2))
+    print("NLL = %.3f\n" % np.sum(NLL_list))
     print("\n")
     resfx = (np.median(l_fit_est_list), np.median(beta_est_1_list), np.median(beta_est_2_list), np.median(tau_est_list))
-    resffun = np.median(NLL_list)
+    resffun = np.sum(NLL_list)
     
     results.append(resfx)
     results.append(resffun)
@@ -441,10 +441,10 @@ def estimate_2env(W, L, nr_trials, nr_blocks, data):
              np.median(beta_est_list), (np.percentile(beta_est_list, 75) - np.percentile(beta_est_list, 25))/2,
              np.median(tau_est_1_list), (np.percentile(tau_est_1_list, 75) - np.percentile(tau_est_1_list, 25))/2,
              np.median(tau_est_2_list), (np.percentile(tau_est_2_list, 75) - np.percentile(tau_est_2_list, 25))/2 ))
-    print("NLL = %.3f +- %.3f \n" % (np.median(NLL_list), (np.percentile(NLL_list, 75) - np.percentile(NLL_list, 25))/2))
+    print("NLL = %.3f\n" % np.sum(NLL_list))
     print("\n")
     resfx = (np.median(l_fit_est_list), np.median(beta_est_list), np.median(tau_est_1_list), np.median(tau_est_2_list))
-    resffun = np.median(NLL_list)
+    resffun = np.sum(NLL_list)
     
     results.append(resfx)
     results.append(resffun)
@@ -506,10 +506,10 @@ def estimate_2env(W, L, nr_trials, nr_blocks, data):
              np.median(beta_est_2_list), (np.percentile(beta_est_2_list, 75) - np.percentile(beta_est_2_list, 25))/2,
              np.median(tau_est_1_list), (np.percentile(tau_est_1_list, 75) - np.percentile(tau_est_1_list, 25))/2,
              np.median(tau_est_2_list), (np.percentile(tau_est_2_list, 75) - np.percentile(tau_est_2_list, 25))/2 ))
-    print("NLL = %.3f +- %.3f \n" % (np.median(NLL_list), (np.percentile(NLL_list, 75) - np.percentile(NLL_list, 25))/2))
+    print("NLL = %.3f\n" % np.sum(NLL_list))
     print("\n")
     resfx = (np.median(l_fit_est_list), np.median(beta_est_1_list), np.median(beta_est_2_list), np.median(tau_est_1_list), np.median(tau_est_2_list))
-    resffun = np.median(NLL_list)
+    resffun = np.sum(NLL_list)
     
     results.append(resfx)
     results.append(resffun)
@@ -567,10 +567,10 @@ def estimate_2env(W, L, nr_trials, nr_blocks, data):
              np.median(beta_est_list), (np.percentile(beta_est_list, 75) - np.percentile(beta_est_list, 25))/2, 
              np.median(tau_est_1_list), (np.percentile(tau_est_1_list, 75) - np.percentile(tau_est_1_list, 25))/2,
              np.median(tau_est_2_list), (np.percentile(tau_est_2_list, 75) - np.percentile(tau_est_2_list, 25))/2 ))
-    print("NLL = %.3f +- %.3f \n" % (np.median(NLL_list), (np.percentile(NLL_list, 75) - np.percentile(NLL_list, 25))/2))
+    print("NLL = %.3f\n" % np.sum(NLL_list))
     print("\n")
     resfx = (np.median(l_fit_est_1_list), np.median(l_fit_est_2_list), np.median(beta_est_list), np.median(tau_est_1_list), np.median(tau_est_2_list))
-    resffun = np.median(NLL_list)
+    resffun = np.sum(NLL_list)
     
     results.append(resfx)
     results.append(resffun)
@@ -628,10 +628,10 @@ def estimate_2env(W, L, nr_trials, nr_blocks, data):
              np.median(beta_est_1_list), (np.percentile(beta_est_1_list, 75) - np.percentile(beta_est_1_list, 25))/2,
              np.median(beta_est_2_list), (np.percentile(beta_est_2_list, 75) - np.percentile(beta_est_2_list, 25))/2,
              np.median(tau_est_list), (np.percentile(tau_est_list, 75) - np.percentile(tau_est_list, 25))/2 ))
-    print("NLL = %.3f +- %.3f \n" % (np.median(NLL_list), (np.percentile(NLL_list, 75) - np.percentile(NLL_list, 25))/2))
+    print("NLL = %.3f\n" % np.sum(NLL_list))
     print("\n")
     resfx = (np.median(l_fit_est_1_list), np.median(l_fit_est_2_list), np.median(beta_est_1_list), np.median(beta_est_2_list), np.median(tau_est_list))
-    resffun = np.median(NLL_list)
+    resffun = np.sum(NLL_list)
     
     results.append(resfx)
     results.append(resffun)
@@ -677,13 +677,13 @@ def wrapper(par, *args):
     The probability that the data is generated 
     by a model with the given model parameters
     is 
-    prob = L + bias
+    prob = L * bias
     so 
     NLprob = NLL + NLbias = NLL - Lbias
     '''
     term1 = NLL(W, L, nr_trials, l_fit, beta, tau, initial_opened, selected_choice, reward, average_reward)
-    term2 = scipy.stats.multivariate_normal.pdf((l_fit, beta, tau), x0, xcov)
-    NLprob = term1 - np.log(term2+1)
+    term2 = NLbias((l_fit, beta, tau), x0, xcov)
+    NLprob = term1 + term2
     return NLprob
 
     
@@ -729,7 +729,7 @@ def wrapper3A(par, *args):
     The probability that the data is generated 
     by a model with the given model parameters
     is 
-    prob = L + bias
+    prob = L * bias
     so 
     NLprob = NLL + NLbias = NLL - Lbias
     '''
@@ -756,11 +756,9 @@ def wrapper3A(par, *args):
                 [value for value in data_partial.selected_choice],
                 [value for value in data_partial.reward],
                 [value for value in data_partial.average_reward]) #for the second blocks
-
-    term2 = scipy.stats.multivariate_normal.pdf((l_fit_1, beta, tau), x0, xcov) #for the first blocks
-    term2 += scipy.stats.multivariate_normal.pdf((l_fit_2, beta, tau), x0, xcov) #for the second blocks
-
-    NLprob = term1 - np.log(term2+1)
+    
+    term2 = NLbias((l_fit_1, l_fit_2, beta, tau), x0 = (x0[0], x0[0], x0[1], x0[2]), xcov = np.diag(xstd[0], xstd[0], xstd[1], xstd[2]))
+    NLprob = term1 + term2
     return NLprob
 
 
@@ -822,10 +820,9 @@ def wrapper3B(par, *args):
                 [value for value in data_partial.reward],
                 [value for value in data_partial.average_reward]) #for the second blocks
 
-    term2 = scipy.stats.multivariate_normal.pdf((l_fit, beta_1, tau), x0, xcov) #for the first blocks
-    term2 += scipy.stats.multivariate_normal.pdf((l_fit, beta_2, tau), x0, xcov) #for the second blocks
+    term2 = NLbias((l_fit, beta_1, beta_2, tau), x0 = (x0[0], x0[1], x0[1], x0[2]), xcov = np.diag(xstd[0], xstd[1], xstd[1], xstd[2]))
 
-    NLprob = term1 - np.log(term2+1)
+    NLprob = term1 + term2
     return NLprob
 
 
@@ -887,10 +884,9 @@ def wrapper3C(par, *args):
                 [value for value in data_partial.reward],
                 [value for value in data_partial.average_reward]) #for the second blocks
 
-    term2 = scipy.stats.multivariate_normal.pdf((l_fit, beta, tau_1), x0, xcov) #for the first blocks
-    term2 += scipy.stats.multivariate_normal.pdf((l_fit, beta, tau_2), x0, xcov) #for the second blocks
+    term2 = NLbias((l_fit, beta, tau_1, tau_2), x0 = (x0[0], x0[1], x0[2], x0[2]), xcov = np.diag(xstd[0], xstd[1], xstd[2], xstd[2]))
 
-    NLprob = term1 - np.log(term2+1)
+    NLprob = term1 + term2
     return NLprob
 
 
@@ -955,10 +951,10 @@ def wrapper4A(par, *args):
                 [value for value in data_partial.reward],
                 [value for value in data_partial.average_reward]) #for the second blocks
 
-    term2 = scipy.stats.multivariate_normal.pdf((l_fit, beta_1, tau_1), x0, xcov) #for the first blocks
-    term2 += scipy.stats.multivariate_normal.pdf((l_fit, beta_2, tau_2), x0, xcov) #for the second blocks
+    
+    term2 = NLbias((l_fit, beta_1, beta_2, tau_1, tau_2), x0 = (x0[0], x0[1], x0[1], x0[2], x0[2]), xcov = np.diag(xstd[0], xstd[1], xstd[1], xstd[2], xstd[2]))
 
-    NLprob = term1 - np.log(term2+1)
+    NLprob = term1 + term2
     return NLprob
 
 def wrapper4B(par, *args):
@@ -1022,10 +1018,9 @@ def wrapper4B(par, *args):
                 [value for value in data_partial.reward],
                 [value for value in data_partial.average_reward]) #for the second blocks
 
-    term2 = scipy.stats.multivariate_normal.pdf((l_fit_1, beta, tau_1), x0, xcov) #for the first blocks
-    term2 += scipy.stats.multivariate_normal.pdf((l_fit_2, beta, tau_2), x0, xcov) #for the second blocks
+    term2 = NLbias((l_fit_1, l_fit_2, beta, tau_1, tau_2), x0 = (x0[0], x0[0], x0[1], x0[2], x0[2]), xcov = np.diag(xstd[0], xstd[0], xstd[1], xstd[2], xstd[2]))
 
-    NLprob = term1 - np.log(term2+1)
+    NLprob = term1 + term2
     return NLprob
 
 def wrapper4C(par, *args):
@@ -1089,11 +1084,10 @@ def wrapper4C(par, *args):
                 [value for value in data_partial.selected_choice],
                 [value for value in data_partial.reward],
                 [value for value in data_partial.average_reward]) #for the second blocks
+    
+    term2 = NLbias((l_fit_1, l_fit_2, beta_1, beta_2, tau), x0 = (x0[0], x0[0], x0[1], x0[1], x0[2]), xcov = np.diag(xstd[0], xstd[0], xstd[1], xstd[1], xstd[2]))
 
-    term2 = scipy.stats.multivariate_normal.pdf((l_fit_1, beta_1, tau), x0, xcov) #for the first blocks
-    term2 += scipy.stats.multivariate_normal.pdf((l_fit_2, beta_2, tau), x0, xcov) #for the second blocks
-
-    NLprob = term1 - np.log(term2+1)
+    NLprob = term1 + term2
     return NLprob
 
 
@@ -1203,3 +1197,27 @@ def GP(observations, W, L, l_fit, opened_cells2D, noise=True, epsilon = 0.0001):
     
     return mlist, sigmalist
 
+
+
+def NLbias(par, x0, xcov):
+    """
+    function to calculate the negative log of the bias term
+    this term comes from a multivariate normal distribution
+    (the prior of the model parameters)
+
+    Parameters
+    ----------
+    par: (l_fit, beta, tau)
+    x0 : mean of the prior
+    xcov : covariance matrix of the prior
+
+    Returns
+    -------
+    return the NL of the bias term
+
+    """
+    NLbias = 0
+    for i in range(len(par)):
+        NLbias += (par[i]-x0[i])**2/xcov[i][i]
+   
+    return NLbias/2
